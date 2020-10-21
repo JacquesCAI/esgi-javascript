@@ -83,13 +83,12 @@ function prop_access(obj, props) {
     return value
 }
 
-let prairie = {
-    animal : {
-        type: {
-            name: "chien"
-        }
+const animal = {
+    'annaconda': {
+        'color': "green"
     }
 }
+
 
 function verlan(chaine) {
     if (typeof (chaine) != "string" || chaine === "") return "";
