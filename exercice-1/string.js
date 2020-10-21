@@ -38,7 +38,6 @@ function leet(chaine) {
 
 function prop_access(obj, props) {
     if (obj === "undefined") return obj
-    if (obj === null) return obj
     if (typeof props !== "string" && props !== "") return obj
 
     let access = props.split(".")
