@@ -91,31 +91,31 @@ let prairie = {
     }
 }
 
-function verlan(string) {
-    if (typeof string !== "string" && string !== "") return ""
+function verlan(chaine) {
+    if (typeof (chaine) != "string" || chaine === "") return "";
 
-    return string.split(" ").map((word) => {
+    return chaine.split(" ").map((word) => {
         return word.split("").reverse().join("")
     }).join(" ")
 }
 
-function yoda(string) {
-    if (typeof string !== "string" && string !== "") return ""
+function yoda(chaine) {
+    if (typeof (chaine) != "string" || chaine === "") return "";
 
-    return string.split(" ").reverse().join(" ")
+    return chaine.split(" ").reverse().join(" ")
 }
 
-function vig(key, string) {
+function vig(key, chaine) {
     if (typeof key !== "string" && key !== "") return ""
-    if (typeof string !== "string" && string !== "") return ""
+    if (typeof (chaine) != "string" || chaine === "") return "";
 
-    const msgLength = string.length
+    const msgLength = chaine.length
     const keyLength = key.length
 
     let cryptage = "";
 
     for (let i = 1; i < msgLength; i++) {
-        let charCode = string.charCodeAt(i-1)-65
+        let charCode = chaine.charCodeAt(i-1)-65
         let decalage = key.charCodeAt((i-1)%keyLength)-65
         let char = String.fromCharCode(65+(charCode+decalage)%26)
 
