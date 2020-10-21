@@ -17,10 +17,15 @@ function capitalize(chaine) {
     return str;
 }
 
-function camelCase(string) {
-    if (typeof string !== "string" && string !== "") return "";
+function camelCase(chaine) {
+    if (typeof(chaine) != "string" || chaine === "") return "";
 
-    return capitalize(string).split(" ").join("")
+    let str = "";
+    let words = chaine.split(" ");
+    for(let i=0;i<words.length;i++) {
+        str += ucfirst(words[i].toLowerCase());
+    }
+    return str;
 }
 
 
@@ -61,4 +66,24 @@ function leet(string) {
     return string;
 }
 
-console.log(leet("j'AIME les spagetti"));
+function prop_access(obj, path) {
+    if (typeof(obj) != "object") return path;
+    if (typeof(path) != "string" || path === "") return obj;
+    let pathSplitted = path.split(".");
+    for (let elem of pathSplitted) {
+        if (typeof(obj[elem]) == "undefined") {
+            return path;
+        }
+        obj = obj[elem]
+    }
+    return obj
+}
+
+
+let prairie = {
+    animal : {
+        type: {
+            name: "chien"
+        }
+    }
+}
