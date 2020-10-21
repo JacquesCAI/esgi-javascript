@@ -17,10 +17,12 @@ function capitalize(chaine) {
     return str;
 }
 
-function camelCase(chaine){
-    if (typeof chaine !== "string" || chaine === "") return "";
-    return capitalize(chaine).split(' ').join('');
+function camelCase(string) {
+    if (typeof string !== "string" && string !== "") return "";
+
+    return capitalize(string).split(" ").join("")
 }
+
 
 function snake_case(chaine) {
     if (typeof (chaine) != "string" || chaine === "") return "";
