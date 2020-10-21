@@ -1,65 +1,44 @@
-function ucfirst(string) {
-    if (typeof string !== "string" && string !== "") return "";
-
-    return string.charAt(0).toUpperCase() + string.slice(1)
+function ucfirst(chaine) {
+    if(typeof chaine !== "string" || chaine === "") return "";
+    return chaine.charAt(0).toUpperCase() + chaine.slice(1);
 }
 
-function capitalize(string) {
-    if (typeof string !== "string" && string !== "") return "";
-
-    return string
-        .split(" ")
-        .map((string) => {
-            return ucfirst(string)
-        }).join(" ")
+function capitalize(chaine) {
+    if (typeof(chaine) != "string" || chaine === "") return "";
+    return chaine.split(' ').map(word => ucfirst(chaine.toLowerCase)).join(" ");
 }
 
-function camelCase(string) {
-    if (typeof string !== "string" && string !== "") return "";
-
-    return capitalize(string).split(" ").join("")
+function camelCase(chaine) {
+    if (typeof(chaine) != "string" || chaine === "") return "";
+    return capitalize(chaine).replace(/\W/g, "");
 }
 
-function snake_case(string) {
-    if (typeof string !== "string" && string !== "") return "";
-
-    return string.toLowerCase().replace(" ", "_")
+function snake_case(chaine) {
+    if (typeof(chaine) != "string" || chaine === "") return "";
+    return chaine.toLowerCase().replace(/\W/g, "_");
 }
 
-function leet(string) {
-    if (typeof string !== "string" && string !== "") return "";
-
-    const cryptage = {
-        "a": 4,
-        "e": 3,
-        "i": 1,
-        "o": 0,
-        "u": "(_)",
-        "y": 7
+function leet(chaine) {
+    if (typeof(chaine) != "string" || chaine === "") return ""
+    const toCrypt = {
+        A: 4,
+        E: 3,
+        I: 1,
+        O: "0",
+        U: "(_)",
+        Y: 7
     }
 
-    string = string.toLowerCase()
-
-    for (const cryptageKey in cryptage) {
-        if (string.indexOf(cryptageKey) !== -1) {
-            string = string.replace(new RegExp(cryptageKey, 'g'), cryptage[cryptageKey])
-        }
+    for (let key in toCrypt) {
+        chaine = chaine.replace(new RegExp(key, 'g'), toCrypt[key]);
+        chaine = chaine.replace(new RegExp(key.toLowerCase(), 'g'), toCrypt[key]);
     }
-
-    return string;
+    return chaine;
 }
 
-/*
-    prop_access: obj, props
-    Si Obj n'est pas défini et props n'est pas une string vide
-
-    Récupération du chemin
-
-    on test toute les clé et on récupère la valeur si exist
-    return valeur
- */
 function prop_access(obj, props) {
     if (obj === "undefined") return obj
+    if (obj === null) return obj
     if (typeof props !== "string" && props !== "") return obj
 
     let access = props.split(".")
@@ -78,31 +57,38 @@ function prop_access(obj, props) {
     return value
 }
 
-function verlan(string) {
-    if (typeof string !== "string" && string !== "") return ""
+const animal = {
+    'annaconda': {
+        'color': "green"
+    }
+}
 
-    return string.split(" ").map((word) => {
+
+function verlan(chaine) {
+    if (typeof (chaine) != "string" || chaine === "") return "";
+
+    return chaine.split(" ").map((word) => {
         return word.split("").reverse().join("")
     }).join(" ")
 }
 
-function yoda(string) {
-    if (typeof string !== "string" && string !== "") return ""
+function yoda(chaine) {
+    if (typeof (chaine) != "string" || chaine === "") return "";
 
-    return string.split(" ").reverse().join(" ")
+    return chaine.split(" ").reverse().join(" ")
 }
 
-function vig(key, string) {
+function vig(key, chaine) {
     if (typeof key !== "string" && key !== "") return ""
-    if (typeof string !== "string" && string !== "") return ""
+    if (typeof (chaine) != "string" || chaine === "") return "";
 
-    const msgLength = string.length
+    const msgLength = chaine.length
     const keyLength = key.length
 
     let cryptage = "";
 
     for (let i = 1; i < msgLength; i++) {
-        let charCode = string.charCodeAt(i-1)-65
+        let charCode = chaine.charCodeAt(i-1)-65
         let decalage = key.charCodeAt((i-1)%keyLength)-65
         let char = String.fromCharCode(65+(charCode+decalage)%26)
 
@@ -112,8 +98,3 @@ function vig(key, string) {
     return cryptage
 }
 
-const animal = {
-    'annaconda': {
-        'color': "green"
-    }
-}
