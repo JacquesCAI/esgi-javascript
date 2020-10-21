@@ -22,7 +22,7 @@ function camelCase(chaine) {
     if (typeof(chaine) != "string" || chaine === "") return "";
 
     let str = "";
-    let string = chaine.replace('_','');
+    let string = chaine.replace('_',' ');
     let words = string.split(" ");
     for(let i=0;i<words.length;i++) {
         str += ucfirst(words[i].toLowerCase());
@@ -95,4 +95,24 @@ function yoda(string) {
     if (typeof string !== "string" && string !== "") return ""
 
     return string.split(" ").reverse().join(" ")
+}
+
+function verlan(chaine) {
+    if (typeof(chaine) != "string" && chaine === "") return ""
+    let words = chaine.split(" ");
+
+    let str = "";
+    for (let i=0;i<words.length;i++) {
+        if (i>0) {
+            str += " ";
+        }
+
+        let verlanWord = "";
+        for (let j=words[i].length-1;j>=0;j--) {
+            verlanWord += words[i].charAt(j);
+        }
+        str += verlanWord;
+    }
+
+    return str;
 }
