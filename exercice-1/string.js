@@ -3,14 +3,18 @@ function ucfirst(chaine) {
     return chaine.charAt(0).toUpperCase() + chaine.slice(1);
 }
 
-function capitalize(string) {
-    if (typeof string !== "string" && string !== "") return "";
+function capitalize(chaine) {
+    if (typeof (chaine) != "string" || chaine === "") return "";
 
-    return string
-        .split(" ")
-        .map((string) => {
-            return ucfirst(string)
-        }).join(" ")
+    let str = "";
+    let words = chaine.split(" ");
+    for (let i = 0; i < words.length; i++) {
+        if (i > 0) {
+            str += " ";
+        }
+        str += ucfirst(words[i].toLowerCase());
+    }
+    return str;
 }
 
 
