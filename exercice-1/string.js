@@ -1,48 +1,21 @@
 function ucfirst(chaine) {
-    if (typeof (chaine) != "string" || chaine === "") return "";
+    if(typeof chaine !== "string" || chaine === "") return "";
     return chaine.charAt(0).toUpperCase() + chaine.slice(1);
 }
 
 function capitalize(chaine) {
-    if (typeof (chaine) != "string" || chaine === "") return "";
-
-    let str = "";
-    let words = chaine.split(" ");
-    for (let i = 0; i < words.length; i++) {
-        if (i > 0) {
-            str += " ";
-        }
-        str += ucfirst(words[i].toLowerCase());
-    }
-    return str;
+    if (typeof(chaine) != "string" || chaine === "") return "";
+    return chaine.split(' ').map(word => ucfirst(chaine.toLowerCase)).join(" ");
 }
-
 
 function camelCase(chaine) {
     if (typeof(chaine) != "string" || chaine === "") return "";
-
-    let str = "";
-    let string = chaine.replace('_',' ');
-    let words = string.split(" ");
-    for(let i=0;i<words.length;i++) {
-        str += ucfirst(words[i].toLowerCase());
-    }
-    return str;
+    return capitalize(chaine).replace(/\W/g, "");
 }
 
-
 function snake_case(chaine) {
-    if (typeof (chaine) != "string" || chaine === "") return "";
-
-    let str = "";
-    let words = chaine.split(" ");
-    for (let i = 0; i < words.length; i++) {
-        if (i > 0) {
-            str += "_";
-        }
-        str += words[i].toLowerCase();
-    }
-    return str;
+    if (typeof(chaine) != "string" || chaine === "") return "";
+    return chaine.toLowerCase().replace(/\W/g, "_");
 }
 
 function leet(chaine) {
