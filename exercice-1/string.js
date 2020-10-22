@@ -50,7 +50,6 @@ function yoda(chaine) {
 
 function vig(str, code) {
   while (code.length < str.length) {
-<<<<<<< HEAD
       code += code;
   }
   let codeIndex = 0;
@@ -72,38 +71,3 @@ function prop_access(obj, path) {
       return prev ? prev[curr] : null
   }, obj) || path + " not exist";
 }
-=======
-    code += code;
-  }
-  let codeIndex = 0;
-  return str
-    .split("")
-    .map(function (car) {
-      car = car.toLowerCase();
-      const carCode = car.charCodeAt(0) - "a".charCodeAt(0);
-
-      if (carCode < 0 || carCode > 25) return car;
-      const codeCode = code[codeIndex++].charCodeAt(0) - "a".charCodeAt(0);
-
-      const encodedCode = (carCode + codeCode) % 26;
-
-      return String.fromCharCode(encodedCode + "a".charCodeAt(0));
-    })
-    .join("");
-}
-
-function prop_access(obj, path) {
-  return path.split('.').reduce((prev, curr) => {
-      return prev ? prev[curr] : null
-  }, obj) || path + " not exist";
-}
-
-let prairie = {
-  animal: {
-    color: ["rouge", "bleu"],
-    type: {
-      name: "TOTO",
-    },
-  },
-};
->>>>>>> aec2f6e5a0cf6cfdcbfd3ff29dc9469f45d26908
