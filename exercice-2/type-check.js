@@ -4,17 +4,6 @@ function type_check_v1(val, type) {
       if (type === "array") return Array.isArray(val);
       if (type === "null") return val === null;
       return val != null && !Array.isArray(val);
-    case "number":
-    case "StringNotNumber":
-    case "BooleanNotNumber":
-    case "object":
-    case "string":
-    case "null":
-      return typeof myNumber === typecheck;
-    case "undefined":
-      return myNumber === undefined;
-    case "null":
-      return myNumber === null;
     default:
       return typeof val === type;
   }
