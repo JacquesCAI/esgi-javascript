@@ -1,55 +1,58 @@
-function ucfirst(str) {
-  if (typeof str !== "string" || !str) return "";
-  return str.charAt(0).toUpperCase() + str.slice(1);
+function ucfirst(chaine) {
+  if (typeof chaine !== "string" || chaine === "") return "";
+  return chaine.charAt(0).toUpperCase() + chaine.slice(1);
 }
 
-function capitalize(str) {
-  if (typeof str !== "string" || !str) return "";
-  return str
+function capitalize(chaine) {
+  if (typeof chaine !== "string" || chaine === "") return "";
+  return chaine
     .split(" ")
-    .map(function (item) {
-      return ucfirst(item);
-    })
+    .map((word) => ucfirst(word.toLowerCase()))
     .join(" ");
 }
 
-function snake_case(str) {
-  if (typeof str !== "string" || !str) return "";
-  return str.toLowerCase().replace(/[^a-z0-9]/g, "_");
+function camelCase(chaine) {
+  if (typeof chaine !== "string" || chaine === "") return "";
+  chaine = chaine.replace("_", " ");
+  return capitalize(chaine).replace(/\W/g, "");
+}
+
+function snake_case(chaine) {
+  if (typeof chaine !== "string" || chaine === "") return "";
+  return chaine.toLowerCase().replace(/\W/g, "_");
 }
 
 function leet(chaine) {
-  if (typeof chaine != "string" || chaine === "") return "";
-  const toCrypt = {
-    A: 4,
-    E: 3,
-    I: 1,
-    O: "0",
-    U: "(_)",
-    Y: 7,
-  };
-
-  for (let key in toCrypt) {
-    chaine = chaine.replace(new RegExp(key, "g"), toCrypt[key]);
-    chaine = chaine.replace(new RegExp(key.toLowerCase(), "g"), toCrypt[key]);
-  }
-  return chaine;
+  if (typeof chaine !== "string" || chaine === "") return "";
+  return chaine.replace(/[aeiouy]/gi, function ($e) {
+    switch (e.toLowerCase()) {
+      case "a":
+        return 4;
+      case "e":
+        return 3;
+      case "i":
+        return 1;
+      case "o":
+        return 0;
+      case "u":
+        return "(_)";
+      case "y":
+        return 7;
+    }
+  });
 }
 
-function verlan(str) {
-  if (typeof str !== "string" || !str) return "";
-
-  return str
+function verlan(chaine) {
+  if (typeof chaine !== "string" || chaine === "") return "";
+  return chaine
     .split(" ")
-    .map(function (word) {
-      return word.split("").reverse().join("");
-    })
+    .map((w) => w.split("").reverse().join(""))
     .join(" ");
 }
 
-function yoda(str) {
-  if (typeof str !== "string" || !str) return "";
-  return str.split(" ").reverse().join(" ");
+function yoda(chaine) {
+  if (typeof chaine !== "string" || chaine === "") return "";
+  return chaine.split(" ").reverse().join(" ");
 }
 
 function vig(chaine, code) {
@@ -103,12 +106,3 @@ function prop_access(obj, path) {
     }, obj) || path + " not exist"
   );
 }
-
-let prairie = {
-  animal: {
-    color: ["rouge", "bleu"],
-    type: {
-      name: "TOTO",
-    },
-  },
-};
