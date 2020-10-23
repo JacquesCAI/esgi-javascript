@@ -100,6 +100,9 @@ function vig(chaine, code) {
 }
 
 function prop_access(obj, path) {
+  if (!path) return obj;
+  if (!obj) return `${obj} not exist`;
+
   return (
     path.split(".").reduce((prev, curr) => {
       return prev ? prev[curr] : null;
