@@ -4,6 +4,8 @@ function type_check_v1(val, type) {
       if (type === "array") return Array.isArray(val);
       if (type === "null") return val === null;
       return val != null && !Array.isArray(val);
+    case "undefined":
+      return val === undefined;
     default:
       return typeof val === type;
   }
