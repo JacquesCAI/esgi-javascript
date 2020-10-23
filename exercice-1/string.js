@@ -99,13 +99,27 @@ function vig(chaine, code) {
   return res;
 }
 
-function prop_access(obj, path) {
-  if (!path) return obj;
-  if (!obj) return `${obj} not exist`;
+function prop_access(object, path) {
+  if (typeof path != "string") {
+    return object;
+  }
 
-  return (
-    path.split(".").reduce((prev, curr) => {
-      return prev ? prev[curr] : null;
-    }, obj) || path + " not exist"
-  );
+  if (typeof object != "object" || object == null) {
+    console.log(path + " not exist");
+    return;
+  }
+  if (path === "") {
+    return object;
+  }
+
+  const props = path.split(".");
+  let property = object;
+  props.forEach(function (prop) {
+    if (!property.hasOwnProperty(prop)) {
+      console.log(path + " not exist");
+      return;
+    }
+    property = property[prop];
+  });
+  return property;
 }
