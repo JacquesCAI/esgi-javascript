@@ -18,30 +18,22 @@ function snake_case(str) {
   return str.toLowerCase().replace(/[^a-z0-9]/g, "_");
 }
 
-function leet(str) {
-  if (typeof str !== "string" || !str) return "";
-
-  const vowel = {
-    a: 4,
-    e: 3,
-    i: "1",
-    o: "0",
-    u: "(_)",
-    y: 7,
+function leet(chaine) {
+  if (typeof chaine != "string" || chaine === "") return "";
+  const toCrypt = {
+    A: 4,
+    E: 3,
+    I: 1,
+    O: "0",
+    U: "(_)",
+    Y: 7,
   };
 
-  let chars = str; //.split('')
-
-  let finalStr = "";
-  for (let char of chars) {
-    finalStr += vowel[char.toLowerCase()] || char;
+  for (let key in toCrypt) {
+    chaine = chaine.replace(new RegExp(key, "g"), toCrypt[key]);
+    chaine = chaine.replace(new RegExp(key.toLowerCase(), "g"), toCrypt[key]);
   }
-
-  return finalStr;
-
-  return str.replace(/[aeiouy]/gi, function (char) {
-    return vowel[char.toLowerCase()] || char;
-  });
+  return chaine;
 }
 
 function verlan(str) {
@@ -60,31 +52,56 @@ function yoda(str) {
   return str.split(" ").reverse().join(" ");
 }
 
-function vig(str, code) {
-  while (code.length < str.length) {
-    code += code;
+function vig(chaine, code) {
+  if (
+    typeof chaine != "string" ||
+    chaine === "" ||
+    typeof code != "string" ||
+    code === ""
+  )
+    return "";
+
+  chaine = chaine.toLowerCase();
+
+  const alphabet = "abcdefghijklmnopqrstuvwxyz";
+
+  let numByAlpha = {};
+  let alphaByNum = {};
+
+  for (let i = 0; i < alphabet.length; i++) {
+    numByAlpha[alphabet.charAt(i)] = i;
+    alphaByNum[i] = alphabet.charAt(i);
   }
-  let codeIndex = 0;
-  return str
-    .split("")
-    .map(function (car) {
-      car = car.toLowerCase();
-      const carCode = car.charCodeAt(0) - "a".charCodeAt(0);
 
-      if (carCode < 0 || carCode > 25) return car;
-      const codeCode = code[codeIndex++].charCodeAt(0) - "a".charCodeAt(0);
+  let nbSpace = 0;
+  let res = "";
+  for (let i = 0; i < chaine.length; i++) {
+    let char = chaine[i];
 
-      const encodedCode = (carCode + codeCode) % 26;
+    if (char !== " ") {
+      let charNumber = numByAlpha[char];
+      let charCode = code[(i - nbSpace) % code.length];
+      let charCodeNumber = numByAlpha[charCode];
 
-      return String.fromCharCode(encodedCode + "a".charCodeAt(0));
-    })
-    .join("");
+      charNumber += charCodeNumber;
+      charNumber %= Object.keys(numByAlpha).length;
+      char = alphaByNum[charNumber];
+    } else {
+      nbSpace += 1;
+    }
+
+    res += char;
+  }
+
+  return res;
 }
 
 function prop_access(obj, path) {
-  return path.split('.').reduce((prev, curr) => {
-      return prev ? prev[curr] : null
-  }, obj) || path + " not exist";
+  return (
+    path.split(".").reduce((prev, curr) => {
+      return prev ? prev[curr] : null;
+    }, obj) || path + " not exist"
+  );
 }
 
 let prairie = {
