@@ -24,7 +24,7 @@ function snake_case(chaine) {
 
 function leet(chaine) {
   if (typeof chaine !== "string" || chaine === "") return "";
-  return chaine.replace(/[aeiouy]/gi, function ($e) {
+  return chaine.replace(/[aeiouy]/gi, function (e) {
     switch (e.toLowerCase()) {
       case "a":
         return 4;
