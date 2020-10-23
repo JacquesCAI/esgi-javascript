@@ -3,7 +3,8 @@ function type_check_v1(val, type) {
     case "object":
       if (type === "array") return Array.isArray(val);
       if (type === "null") return val === null;
-      return val != null && !Array.isArray(val);
+      if (type === "object") return val != null && !Array.isArray(val);
+      return false;
     default:
       return typeof val === type;
   }
