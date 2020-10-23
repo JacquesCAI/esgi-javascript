@@ -100,14 +100,12 @@ function vig(chaine, code) {
 }
 
 function prop_access(object, path) {
-  if (typeof path != "string") return object;
+  if (typeof path != "string" || path === "") return object;
 
   if (typeof object != "object" || object == null) {
     console.log(path + " not exist");
     return;
   }
-
-  if (path === "") return object;
 
   const props = path.split(".");
   let property = object;
