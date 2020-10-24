@@ -108,19 +108,22 @@ String.prototype.vig = function (code) {
 };
 
 Object.prototype.prop_access = function (path) {
-  let obj = this;
-  if (typeof obj != "object" || obj == null) return path + " not exist";
-  if (typeof path != "string" || path === "") return obj;
-  let pathSplitted = path.split(".");
-  for (let elem of pathSplitted) {
-    if (typeof obj[elem] == "undefined") {
-      return path + " not exist";
+  let object = this;
+  if (typeof object != "object" || object == null) return path + " not exist";
+  if (typeof path != "string" || path === "") return object;
+
+  const props = path.split(".");
+  let property = object;
+  props.forEach(function (prop) {
+    if (!property.hasOwnProperty(prop)) {
+      console.log(path + " not exist");
+      return;
     }
-    obj = obj[elem];
-  }
-  return obj;
+    property = property[prop];
+  });
+  return property;
 };
 
 const prairie = { animal: { type: { name: "chien" } } };
 
-console.log(prairie.prop_access("animal.type.name"));
+console.log(coucou.prop_access("animal.type"));
